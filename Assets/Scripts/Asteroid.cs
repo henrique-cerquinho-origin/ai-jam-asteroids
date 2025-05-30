@@ -39,6 +39,7 @@ public class Asteroid : MonoBehaviour
         }
         
         GameManager.Instance.AddScore(points);
+        AudioManager.Instance.PlaySFX("asteroid_explosion");
         Destroy(gameObject);
     }
     

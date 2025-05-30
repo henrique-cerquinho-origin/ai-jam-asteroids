@@ -1,0 +1,12 @@
+{
+    "asset": "095229c5071c6422f816d94bb50175e5",
+    "fileName": "019721db-b13f-78e7-ba4c-b50faad72816.wav",
+    "prompt": "Sound effect for player movement in a classic Atari-style Asteroids game.",
+    "negativePrompt": "",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "customSeed": -1,
+    "w3CTraceId": "8ef8f1829f0ae70c92832af24398758e",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}

@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float lastShootTime;
     private bool isThrusting;
+    private bool wasThrusting;
+    private string currentThrustSoundName = "thrust";
     
     private void Start()
     {
@@ -29,7 +31,18 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.forward * -rotation * rotationSpeed * Time.deltaTime);
 
         // Thrust
+        wasThrusting = isThrusting;
         isThrusting = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+
+        // Handle thrust sound
+        if (isThrusting && !wasThrusting)
+        {
+            AudioManager.Instance.PlaySFX(currentThrustSoundName);
+        }
+        else if (!isThrusting && wasThrusting)
+        {
+            AudioManager.Instance.StopAllSFX();
+        }
 
         // Shooting
         if (Input.GetKey(KeyCode.Space) && Time.time > lastShootTime + shootingCooldown)
@@ -61,6 +74,24 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, transform.position + transform.up, transform.rotation);
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.linearVelocity = transform.up * bulletSpeed;
+        
+        // Play shoot sound
+        AudioManager.Instance.PlaySFX("shoot");
+    }
+
+    private void OnDestroy()
+    {
+        // Stop thrust sound if it's playing when destroyed
+        if (isThrusting)
+        {
+            AudioManager.Instance.StopAllSFX();
+        }
+        
+        // Play explosion sound when player is destroyed
+        if (gameObject.scene.isLoaded) // Only play if destroyed during gameplay, not scene unload
+        {
+            AudioManager.Instance.PlaySFX("player_explosion");
+        }
     }
 
     private void WrapAroundScreen()

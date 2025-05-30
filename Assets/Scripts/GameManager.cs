@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject asteroidPrefab;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private AudioClip backgroundMusic;
     
     private int score;
     private bool isGameOver;
@@ -56,6 +57,12 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI();
         gameOverPanel.SetActive(false);
         
+        // Start background music
+        if (backgroundMusic != null)
+        {
+            AudioManager.Instance.PlayMusic(backgroundMusic);
+        }
+        
         // Spawn initial asteroids
         for (int i = 0; i < initialAsteroidCount; i++)
         {
@@ -71,6 +78,12 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameOverPanel.SetActive(true);
         CancelInvoke(nameof(SpawnAsteroid));
+        
+        // Stop all currently playing SFX
+        AudioManager.Instance.StopAllSFX();
+        
+        // Play game over sound
+        AudioManager.Instance.PlaySFX("game_over");
     }
     
     /// <summary>

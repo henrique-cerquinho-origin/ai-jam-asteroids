@@ -1,0 +1,12 @@
+{
+    "asset": "4386a1c0720ae4a88a9dc1258b25f0c9",
+    "fileName": "019721df-42c8-743a-90ea-f7c17bc4be9a.wav",
+    "prompt": "Sound effect for asteroid breaking in a classic Atari-style Asteroids game.",
+    "negativePrompt": "",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "customSeed": -1,
+    "w3CTraceId": "91f33206f707b9c7a3b2548a4a2d4a85",
+    "duration": 1.0,
+    "autoTrim": true,
+    "hasReference": false
+}
